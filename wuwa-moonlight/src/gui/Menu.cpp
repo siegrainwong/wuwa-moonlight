@@ -300,6 +300,7 @@ void Menu::SetIsOpen(bool isOpen)
 void Menu::Toggle()
 {
     if (!SDK::UKuroStaticLibrary::IsForegroundWindow()) return;
+    
 
     bOldState = bIsOpen;
     bIsOpen = !bIsOpen;

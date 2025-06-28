@@ -77,8 +77,10 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 			InitImGui();
 			init = true;
 		}
-		else
+		else {
+			LOG_ERROR("SG: Game is not launching under Dx11!");
 			return oPresent(pSwapChain, SyncInterval, Flags);
+		}
 	}
 
 	g_menu->Setup();
@@ -129,7 +131,7 @@ void D3D11Hook::Initialize()
 
 	if (kiero::getRenderType() != kiero::RenderType::D3D11)
 	{
-		LOG_WARN("kiero initialized with unknown render type");
+		LOG_ERROR("kiero initialized with unknown render type");
 		MessageBoxA(NULL, "kiero initialized with unknown render type\n", "DirectX Error", MB_OK);
 	}
 	else

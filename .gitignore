@@ -47,3 +47,4 @@ out/
 
 # IDE
 .cursorrules
+*.pdb
