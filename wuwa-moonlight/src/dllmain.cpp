@@ -83,7 +83,7 @@ DWORD WINAPI MainThread(HMODULE hMod, [[maybe_unused]] LPVOID lpReserved)
 		LOG_ERROR("Failed to setup ACE bypass");
 	else
 		LOG_SUCCESS("ACE bypass is set up");
-	// Hooks::AntiDebug();
+	//Hooks::AntiDebug();
 
 	// MUST BE INITIALIZED ABOVE -> std::vector<std::unique_ptr<std::thread>> threads
 	D3D11Hook::Initialize();

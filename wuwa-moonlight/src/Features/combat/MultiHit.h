@@ -3,6 +3,8 @@
 #include "SDK.hpp"
 #include <globals.h>
 #include "TsAnimNotifyReSkillEvent_parameters.hpp"
+#include <codecvt>
+#include <locale>
 
 class HitMultiplier
 {
@@ -64,6 +66,25 @@ inline void HitMultiplier::Call(UObject *Object, UFunction *Function, void *Parm
     // Check if the action belongs to our character or an enemy
     if (owner == globals::pawn)
     {
+        FVectorDouble actorLocation = owner->D_K2_GetActorLocation();
+        LOG_INFO("Location: X=%.2f, Y=%.2f, Z=%.2f", actorLocation.X, actorLocation.Y, actorLocation.Z);
+        
+        auto kCharacter = reinterpret_cast<ATsBaseCharacter_C *>(owner);
+        if (kCharacter) {
+            LOG_INFO("kCharacter class: %s", kCharacter->Class->GetFullName().c_str());
+            //LOG_INFO("kCharacter DebugCreatureId: %d", kCharacter->TsCharacterDebugComponent->DebugCreatureId);
+
+            // FIXME: 取不出来，会崩掉。
+            auto property = kCharacter->CharacterData->Class->ChildProperties;
+            while (property) {
+                auto pname = property->Name.ToString();
+                
+                LOG_INFO("CharacterData Property: %s", pname.c_str());
+
+                property = property->Next;
+            }
+        }
+
         for (int i = 1; i < config::multihit::hits; ++i)
         {
             globals::oProcessEvent(Object, Function, Parms);
@@ -82,3 +103,14 @@ inline void HitMultiplier::Call(UObject *Object, UFunction *Function, void *Parm
     // Do not call globals::oProcessEvent at the end of the function,
     // cuz this is will be in hooked func (hkProcessEvent)
 }
+
+//std::string ConvertToUTF8(const std::string& str, UINT fromCodePage = CP_ACP) {
+//    // Step 1: 本地编码/UTF-16 → std::wstring
+//    int wlen = MultiByteToWideChar(fromCodePage, 0, str.c_str(), -1, nullptr, 0);
+//    std::wstring wstr(wlen, 0);
+//    MultiByteToWideChar(fromCodePage, 0, str.c_str(), -1, &wstr[0], wlen);
+//
+//    // Step 2: std::wstring → UTF-8
+//    std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
+//    return converter.to_bytes(wstr);
+//}

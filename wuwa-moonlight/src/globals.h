@@ -19,6 +19,7 @@ namespace globals
 	inline SDK::ULocalPlayer* local_player = nullptr;
 	inline SDK::UGameViewportClient* viewport = nullptr;
 	inline SDK::APlayerController* player_controller = nullptr;
+	// ½ÇÉ«¶ÔÏó ATsBaseCharacter_C
 	inline SDK::APawn* pawn = nullptr;
 	inline SDK::ACharacter* character = nullptr;
 
