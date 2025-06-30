@@ -78,7 +78,7 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 			init = true;
 		}
 		else {
-			LOG_ERROR("SG: Game is not launching under Dx11!");
+			//LOG_ERROR("SG: Game is not launching under Dx11!");
 			return oPresent(pSwapChain, SyncInterval, Flags);
 		}
 	}

@@ -122,7 +122,7 @@ DWORD WINAPI MainThread(HMODULE hMod, [[maybe_unused]] LPVOID lpReserved)
 		try
 		{
 			ptpsafe.get()->Run();
-			fpsUnlock.get()->Run();
+			//fpsUnlock.get()->Run();
 			speedhack.get()->Run();
 			// not working
 			fly.get()->Run();

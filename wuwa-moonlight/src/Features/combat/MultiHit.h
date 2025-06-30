@@ -72,19 +72,23 @@ inline void HitMultiplier::Call(UObject *Object, UFunction *Function, void *Parm
         auto kCharacter = reinterpret_cast<ATsBaseCharacter_C *>(owner);
         if (kCharacter) {
             LOG_INFO("kCharacter class: %s", kCharacter->Class->GetFullName().c_str());
+            DebugBreak();
+
             //LOG_INFO("kCharacter DebugCreatureId: %d", kCharacter->TsCharacterDebugComponent->DebugCreatureId);
 
-            // FIXME: 取不出来，会崩掉。
-            auto property = kCharacter->CharacterData->Class->ChildProperties;
-            while (property) {
+            //auto cData = kCharacter->CharacterData;
+
+            
+
+            /*while (property) {
                 auto pname = property->Name.ToString();
                 
                 LOG_INFO("CharacterData Property: %s", pname.c_str());
 
                 property = property->Next;
-            }
+            }*/
         }
-
+        
         for (int i = 1; i < config::multihit::hits; ++i)
         {
             globals::oProcessEvent(Object, Function, Parms);

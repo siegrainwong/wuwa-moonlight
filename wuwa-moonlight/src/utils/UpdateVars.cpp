@@ -113,6 +113,11 @@ void utils::UpdateGlobals()
         LOG_WARN("No pawn");
         return;
     }
+    else {
+        auto kCharacter = reinterpret_cast<ATsBaseCharacter_C*>(pawn);
+        auto attributes = kCharacter->AttributeSet;
+        LOG_INFO("Got cData");
+    }
 }
 
 bool utils::IsGameExploitable()
